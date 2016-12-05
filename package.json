@@ -1,5 +1,5 @@
 {
-  "name": "promise-thing",
+  "name": "concurrency-fn",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lozlow/promise-thing.git"
+    "url": "git+https://github.com/lozlow/concurrency-fn.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lozlow/promise-thing/issues"
+    "url": "https://github.com/lozlow/concurrency-fn/issues"
   },
-  "homepage": "https://github.com/lozlow/promise-thing#readme"
+  "homepage": "https://github.com/lozlow/concurrency-fn#readme"
 }
