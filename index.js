@@ -1,5 +1,5 @@
-module.exports = function promiseThing (maxConcurrency, taskFn) {
-  const concurrency = maxConcurrency
+module.exports = function promiseThing (taskFn, maxConcurrency) {
+  const concurrency = maxConcurrency || Infinity
   let currentTasks = 0
 
   const queue = []
