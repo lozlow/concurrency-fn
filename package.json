@@ -1,5 +1,5 @@
 {
-  "name": "concurrency-fn",
+  "name": "parallel-fn",
   "version": "0.2.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lozlow/concurrency-fn.git"
+    "url": "git+https://github.com/lozlow/parallel-fn.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lozlow/concurrency-fn/issues"
+    "url": "https://github.com/lozlow/parallel-fn/issues"
   },
-  "homepage": "https://github.com/lozlow/concurrency-fn#readme"
+  "homepage": "https://github.com/lozlow/parallel-fn#readme"
 }

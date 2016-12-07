@@ -1,22 +1,26 @@
-module.exports = function promiseThing (taskFn, maxConcurrency) {
-  const concurrency = maxConcurrency || Infinity
+module.exports = function parallelFn (taskFn, maxParallelism) {
+  const parallelism = maxParallelism || Infinity
   let currentTasks = 0
 
   const queue = []
 
-  const wrapResolveReject = (fn) => (result) => {
+  const wrapResolveReject = (fn) => function wrappedResolveReject (result) {
     fn(result)
     currentTasks--
+    this.called = true
     start()
   }
 
   function start () {
-    const toRun = queue.splice(0, concurrency - currentTasks)
+    const toRun = queue.splice(0, parallelism - currentTasks)
     if (!toRun.length) return
+
     toRun.forEach(
       ({ resolve, reject, args }) => {
         currentTasks++
-        taskFn(wrapResolveReject(resolve), wrapResolveReject(reject), ...args)
+        const wrappedResolve = wrapResolveReject(resolve)
+        const wrappedReject = wrapResolveReject(reject)
+        taskFn(wrappedResolve, wrappedReject, ...args)
       }
     )
   }
