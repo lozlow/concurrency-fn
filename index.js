@@ -7,7 +7,6 @@ module.exports = function parallelFn (taskFn, maxParallelism) {
   const wrapResolveReject = (fn) => function wrappedResolveReject (result) {
     fn(result)
     currentTasks--
-    this.called = true
     start()
   }
 
@@ -16,18 +15,18 @@ module.exports = function parallelFn (taskFn, maxParallelism) {
     if (!toRun.length) return
 
     toRun.forEach(
-      ({ resolve, reject, args }) => {
+      ({ resolve, reject, args, self }) => {
         currentTasks++
-        const wrappedResolve = wrapResolveReject(resolve)
-        const wrappedReject = wrapResolveReject(reject)
-        taskFn(wrappedResolve, wrappedReject, ...args)
+        taskFn.apply(self, args)
+          .then(wrapResolveReject(resolve))
+          .catch(wrapResolveReject(reject))
       }
     )
   }
 
   return function (...args) {
     return new Promise((resolve, reject) => {
-      queue.push({ resolve, reject, args })
+      queue.push({ resolve, reject, args, self: this })
       start()
     })
   }
